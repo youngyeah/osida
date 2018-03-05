@@ -3,8 +3,6 @@
         PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
-    <!-- 引入 application.properties -->
-    <!--<properties resource="application-dev.yml" />-->
 
     <!-- MyBatis3Simple：不生成 Example相关类及方法 -->
     <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
@@ -12,7 +10,7 @@
         <property name="endingDelimiter" value="`" />
         <!-- 指定生成 Mapper 的继承模板 -->
         <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
-            <property name="mappers" value="com.osida.management.common.base.BaseMapper" />
+            <property name="mappers" value="com.osida.common.base.BaseMapper" />
         </plugin>
         <!-- 生成 JavaBean 对象重写 toString方法 -->
         <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
@@ -26,20 +24,20 @@
                         userId="root"
                         password="123456">
         </jdbcConnection>
-        <javaModelGenerator targetPackage="com.osida.management.domain"
+        <javaModelGenerator targetPackage="com.osida.system.domain"
                             targetProject="src/main/java" />
         <sqlMapGenerator targetPackage="mapper"
                          targetProject="src/main/resources" />
-        <javaClientGenerator targetPackage="com.osida.management.dao"
+        <javaClientGenerator targetPackage="com.osida.system.dao"
                              targetProject="src/main/java" type="XMLMAPPER" />
         <!-- Mysql 配置 -->
         <!-- <generatedKey column="id" sqlStatement="Mysql" identity="true" /> -->
         <!-- Oracle 配置 -->
         <!-- <generatedKey column="id" sqlStatement="select SEQ_{1}.nextval from dual" identity="false" type="pre"/> -->
         <!-- tableName：数据库表名，domainObjectName：生成文件名 ，schema：数据源-->
-        <table tableName="sys_user"
-            domainObjectName="UserDO">
-            <generatedKey column="user_id" sqlStatement="Mysql" identity="true" />
+        <table tableName="sys_menu"
+            domainObjectName="MenuDO">
+            <generatedKey column="menu_id" sqlStatement="Mysql" identity="true" />
         </table>
     </context>
 </generatorConfiguration>

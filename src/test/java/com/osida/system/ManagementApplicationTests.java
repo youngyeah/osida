@@ -1,7 +1,7 @@
-package com.osida.management;
+package com.osida.system;
 
-import com.osida.management.dao.UserDOMapper;
-import com.osida.management.domain.UserDO;
+import com.osida.system.dao.UserDOMapper;
+import com.osida.system.domain.UserDO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

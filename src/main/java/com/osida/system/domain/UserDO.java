@@ -1,4 +1,4 @@
-package com.osida.management.domain;
+package com.osida.system.domain;
 
 import java.io.Serializable;
 import java.util.Date;

@@ -1,4 +1,4 @@
-package com.osida.management.common.base;
+package com.osida.common.base;
 
 
 import tk.mybatis.mapper.common.Mapper;
