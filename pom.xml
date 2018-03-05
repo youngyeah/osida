@@ -25,6 +25,9 @@
 		<mybatisplus-spring-boot-starter.version>1.0.4</mybatisplus-spring-boot-starter.version>
 		<velocity.version>1.7</velocity.version>
 		<activiti.version>5.22.0</activiti.version>
+		<mybatis-generator.version>1.3.3</mybatis-generator.version>
+		<mybatis-tk.version>1.1.4</mybatis-tk.version>
+		<mybatis.version>1.3.1</mybatis.version>
 	</properties>
 
 	<dependencies>
@@ -64,6 +67,11 @@
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
 			<version>3.4.4</version>
+		</dependency>
+		<dependency>
+			<groupId>tk.mybatis</groupId>
+			<artifactId>mapper-spring-boot-starter</artifactId>
+			<version>${mybatis-tk.version}</version>
 		</dependency>
 
 		<dependency>
@@ -121,17 +129,6 @@
 			<artifactId>fastjson</artifactId>
 			<version>1.2.31</version>
 		</dependency>
-		<!--velocity代码生成使用模板 -->
-		<dependency>
-			<groupId>org.apache.velocity</groupId>
-			<artifactId>velocity</artifactId>
-			<version>1.7</version>
-		</dependency>
-		<!-- ehchache -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-cache</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>net.sf.ehcache</groupId>
 			<artifactId>ehcache</artifactId>
@@ -179,9 +176,20 @@
 			<artifactId>jsoup</artifactId>
 			<version>1.9.2</version>
 		</dependency>
-
 	</dependencies>
 	<build>
+
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.yml</include>
+					<include>**/*.properties</include>
+					<include>**/*.xml</include>
+				</includes>
+			</resource>
+		</resources>
+
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -190,9 +198,51 @@
 					<executable>true</executable>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>org.mybatis.generator</groupId>
+				<artifactId>mybatis-generator-maven-plugin</artifactId>
+				<version>1.3.2</version>
+				<dependencies>
+					<dependency>
+						<groupId> mysql</groupId>
+						<artifactId> mysql-connector-java</artifactId>
+						<version>5.1.27</version>
+					</dependency>
+					<dependency>
+						<groupId>org.mybatis.generator</groupId>
+						<artifactId>mybatis-generator-core</artifactId>
+						<version>1.3.2</version>
+					</dependency>
+					<!-- https://mvnrepository.com/artifact/tk.mybatis/mapper -->
+					<dependency>
+						<groupId>tk.mybatis</groupId>
+						<artifactId>mapper</artifactId>
+						<version>3.4.5</version>
+					</dependency>
+				</dependencies>
+				<executions>
+					<execution>
+						<id>Generate MyBatis Artifacts</id>
+						<phase>package</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<!--允许移动生成的文件 -->
+					<verbose>true</verbose>
+					<!-- 是否覆盖 -->
+					<overwrite>false</overwrite>
+					<!-- 自动生成的配置 -->
+					<configurationFile>
+						src/main/resources/mybatis-generator.xml</configurationFile>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
-	<repositories>
+	<!--<repositories>
 		<repository>
 			<id>public</id>
 			<name>aliyun nexus</name>
@@ -214,5 +264,5 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</pluginRepository>
-	</pluginRepositories>
+	</pluginRepositories>-->
 </project>
